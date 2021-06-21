@@ -3,6 +3,7 @@
   <div class="row">
     <div class="col-4">
       <select v-model="category.type">
+        <option value="">全部</option>
         <option v-for="item in products" :key="item.id">
           {{item.category}}</option>
       </select>
@@ -28,7 +29,7 @@ export default {
       path: 'iven_vue3_course',
       products: [],
       category: {
-        type: ''
+        type: '全部'
       }
     }
   },
@@ -40,22 +41,33 @@ export default {
       this.$http.get(`${this.url}api/${this.path}/products`)
         .then(res => {
           this.products = res.data.products
-          this.category.type = Object.values(res.data.products).map(item => {
-            return item.category
-          })
-          console.log(this.category.type)
-          console.log(res)
+          this.category.type = this.products.map(item => Object.values(item)[0])
+          // console.log(this.products.category)
+          // this.category.type = Object.values(res.data.products)
+          // this.category.type = this.products.map(item=> Object.values(res.data.products).map((item) => {
+          //   return item.category
+          // })
+          // console.log(this.category.type)
+          // console.log(res)
         })
     }
   },
   computed: {
     // eslint-disable-next-line vue/return-in-computed-property
     typeProducts () {
-      if (this.category.type) {
-        return this.products
+      const vm = this
+      if (vm.category.type === '') {
+        // console.log(vm.products)
+        return vm.products
+        // } else if (this.category.type === '登山新手') {
+        //   console.log(this.products)
       } else {
-        this.products.filter((item, index) => {
-          return item.category === this.category.type
+        console.log(vm.category.type)
+        // console.log(vm.products.category)
+        // return vm.products.category
+        vm.products.filter((item, index) => {
+          console.log(item.category === vm.category.type)
+          return item.category === vm.category.type
         })
       }
     }
