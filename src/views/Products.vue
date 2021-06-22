@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-4">
-      <select v-model="category.type">
+      <select v-model="category.type" @change="change">
         <option value="">全部</option>
         <option v-for="item in products" :key="item.id">
           {{item.category}}</option>
@@ -29,8 +29,9 @@ export default {
       path: 'iven_vue3_course',
       products: [],
       category: {
-        type: '全部'
-      }
+        type: ''
+      },
+      typeProducts: []
     }
   },
   // components: {
@@ -38,42 +39,33 @@ export default {
   // },
   methods: {
     getProducts () {
-      this.$http.get(`${this.url}api/${this.path}/products`)
+      this.$http.get(`${this.url}api/${this.path}/products/all`)
         .then(res => {
           this.products = res.data.products
           this.category.type = this.products.map(item => Object.values(item)[0])
-          // console.log(this.products.category)
           // this.category.type = Object.values(res.data.products)
           // this.category.type = this.products.map(item=> Object.values(res.data.products).map((item) => {
           //   return item.category
           // })
           // console.log(this.category.type)
-          // console.log(res)
+          // console.log(this.products.length)
         })
-    }
-  },
-  computed: {
-    // eslint-disable-next-line vue/return-in-computed-property
-    typeProducts () {
-      const vm = this
-      if (vm.category.type === '') {
-        // console.log(vm.products)
-        return vm.products
-        // } else if (this.category.type === '登山新手') {
-        //   console.log(this.products)
-      } else {
-        console.log(vm.category.type)
-        // console.log(vm.products.category)
-        // return vm.products.category
-        vm.products.filter((item, index) => {
-          console.log(item.category === vm.category.type)
-          return item.category === vm.category.type
-        })
-      }
+    },
+    change () {
+      this.typeProducts = this.products.filter(item => {
+        if (this.category.type === '') {
+          // console.log(item.category === this.category.type)
+          // console.log(item.category)
+          return this.products
+        } else {
+          return item.category === this.category.type
+        }
+      })
     }
   },
   mounted () {
     this.getProducts()
   }
 }
+
 </script>
