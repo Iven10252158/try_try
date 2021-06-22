@@ -13,6 +13,7 @@
     </div>
   </swiper-slide>
 </swiper>
+<card></card>
 </div>
 </template>
 <style lang="scss">
@@ -34,11 +35,13 @@ import 'swiper/components/navigation/navigation.scss'
 import SwiperCore, {
   Navigation
 } from 'swiper/core'
+
+import card from '@/components/Card.vue'
 // install Swiper modules
 SwiperCore.use([Navigation])
-
 export default {
   components: {
+    card,
     Swiper,
     SwiperSlide
   },
@@ -46,7 +49,17 @@ export default {
     return {
       url: 'https://vue3-course-api.hexschool.io/',
       path: 'iven_vue3_course',
-      products: []
+      products: [],
+      user: {
+        name: '小明',
+        uuid: 78163
+      }
+    }
+  },
+  provide: {
+    user: {
+      name: '小明',
+      uuid: 78163
     }
   },
   methods: {
