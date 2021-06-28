@@ -1,5 +1,32 @@
 <template>
 <div class="container">
+  <div data-aos="fade-down" data-aos-duration="3000">
+    <p>{{user}}</p>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <h1>swiper</h1>
 <swiper ref="{swiperRef}" :slidesPerView="3" :centeredSlides="true" :spaceBetween="30"
 :navigation="true" class="mySwiper text-center border p-5">
@@ -13,6 +40,7 @@
     </div>
   </swiper-slide>
 </swiper>
+<input type="date">
 <card></card>
 </div>
 </template>
@@ -24,6 +52,7 @@
 </style>
 
 <script>
+
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
